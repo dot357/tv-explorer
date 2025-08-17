@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { Button } from 'primevue';
 import TestComponent from '@components/TestComponent.vue';
+
+
+function switchTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  if (currentTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+
+}
 </script>
 
 <template>
@@ -10,10 +21,20 @@ import TestComponent from '@components/TestComponent.vue';
   <h1>
     TV Explorer
   </h1>
+<!-- 
+  <div class="bg-bg text-text p-4 rounded-xl shadow-card">
+  <p class="text-muted">Hello tokens 👋</p>
+  <button class="ring-focus rounded-md px-4 py-2 bg-primary/15 hover:bg-primary/20">
+    Action
+  </button>
+</div> -->
 
-  <section>
-     <Button label="Hello World" icon="pi pi-plus" />
-
+  <section class="card">
+    
+     <Button label="Switch theme" class="btn" icon="pi pi-plus" @click="switchTheme" />
+    <div class="chip">
+      test
+    </div>
      <section class="bg-bg">
       <TestComponent /> 
      </section>

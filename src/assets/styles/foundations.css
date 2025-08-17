@@ -17,9 +17,13 @@
   --color-warn:    hsl(var(--brand-warn));
   --color-error:   hsl(var(--brand-error));
 
+  --color-white: #ffffff;
+  --color-black: #000000;
+
   /* spacing -> p-4, gap-3, w-16, etc. */
   --spacing-*: initial;
   --spacing-0: 0px;
+  --spacing-0\.5: 2px;
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -46,3 +50,4 @@
 @layer utilities {
   .ring-focus { @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-surface; }
 }
+

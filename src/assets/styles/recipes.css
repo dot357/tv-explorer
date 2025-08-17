@@ -1,0 +1,9 @@
+
+@import '@assets/styles/foundations.css';
+
+@layer components {
+  .card { @apply rounded-2xl bg-surface/80 ring-1 ring-white/10 p-3 shadow-card; }
+  .chip { @apply rounded-full px-2 py-0.5 text-xs ring-1 ring-white/10 bg-surface; }
+  .btn  { @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm transition focus:outline-none ring-1 ring-white/10; }
+  .btn-primary { @apply bg-primary/15 hover:bg-primary/20; }
+}
