@@ -34,3 +34,7 @@ add documentation entry for how to extend alias via vite config and make sure to
   }
  }
  ```
+
+
+## Tokens
+TODO : Add documentation entry for tokens and why we keep them in public
