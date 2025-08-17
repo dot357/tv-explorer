@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+import { Button } from 'primevue';
 </script>
 
 <template>
@@ -12,6 +13,8 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+
+  <Button label="Hello World" icon="pi pi-plus" />
 </template>
 
 <style scoped>
