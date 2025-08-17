@@ -14,7 +14,9 @@ import TestComponent from '@components/TestComponent.vue';
   <section>
      <Button label="Hello World" icon="pi pi-plus" />
 
-     <TestComponent />
+     <section class="bg-bg">
+      <TestComponent /> 
+     </section>
 
   <Button
     label="Search asd"

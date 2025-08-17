@@ -9,7 +9,7 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirnameApp = path.dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -19,14 +19,14 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@views': path.resolve(__dirname, 'src/views'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@store': path.resolve(__dirname, 'src/store'),
-      '@api': path.resolve(__dirname, 'src/api')
+      '@': path.resolve(__dirnameApp, 'src'),
+      '@components': path.resolve(__dirnameApp, 'src/components'),
+      '@views': path.resolve(__dirnameApp, 'src/views'),
+      '@assets': path.resolve(__dirnameApp, 'src/assets'),
+      '@styles': path.resolve(__dirnameApp, 'src/styles'),
+      '@utils': path.resolve(__dirnameApp, 'src/utils'),
+      '@store': path.resolve(__dirnameApp, 'src/store'),
+      '@api': path.resolve(__dirnameApp, 'src/api')
     }
   },
   test: {

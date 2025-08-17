@@ -1,0 +1,42 @@
+/* v1 — Design tokens via CSS variables (HSL for easy opacity control) */
+:root {
+  /* brand palette (restricted + semantic) */
+  --brand-primary: 200 65% 55%;
+  --brand-accent:  16 90% 58%;
+  --brand-bg:      210 35% 6%;
+  --brand-surface: 210 30% 10%;
+  --brand-text:    210 30% 96%;
+  --brand-muted:   210 20% 70%;
+
+  /* states */
+  --brand-success: 150 60% 45%;
+  --brand-warn:     40 90% 55%;
+  --brand-error:     0 80% 60%;
+
+  /* spacing (opinionated) */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+}
+
+/* light theme */
+[data-theme="light"] {
+  --brand-bg:      0 0% 100%;
+  --brand-surface: 210 20% 97%;
+  --brand-text:    210 25% 10%;
+  --brand-muted:   210 10% 45%;
+}
+
+/* dark theme */
+[data-theme="dark"] {
+  --brand-bg:      210 35% 6%;
+  --brand-surface: 210 30% 10%;
+  --brand-text:    210 30% 96%;
+  --brand-muted:   210 20% 70%;
+}
