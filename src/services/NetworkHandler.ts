@@ -107,6 +107,17 @@ export class NetworkHandler<T extends RequestMap> {
           const payload: R = res.data;
           data.value = opts?.mapResponse ? opts.mapResponse(payload) : payload;
         } catch (e) {
+          const aborted =
+            (typeof e === 'object' && e && ('name' in e) && (e as any).name === 'AbortError') ||
+            (e as any)?.code === 'ABORT_ERR' ||
+            controller?.signal.aborted;
+
+          if (aborted) {
+            status.value = 0;
+            error.value = null;  // dont surface abort as an error 
+            return;              // stop retries on abort
+          }
+
           const ne = normalizeError(e);
           status.value = ne.status ?? 0;
 

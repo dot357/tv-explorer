@@ -51,7 +51,7 @@ Instead of scattering `axios` or `fetch` calls throughout the app, all requests 
 - **Developer Experience:** Requests are strongly typed, so when you call a service method you get autocompletion and correct return types.
 - **Reusability:** Adding a new service only requires defining an adapter and registering its endpoints — the rest of the app consumes clean service methods like tvService.getShows()
 - **Testability:** The NetworkHandler is easily testable, and can be mocked for unit tests.
-- **Portable:** : This design can be droped in into any framework or library and carry the same imlementation.
+- **Portable:** : This design can be droped in into any framework or library with tiny changes and carry the same imlementation.
 
 ## Pluggable fetcher
 This design is fetcher-agnostic.
