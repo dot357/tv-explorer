@@ -36,10 +36,60 @@ add documentation entry for how to extend alias via vite config and make sure to
  ```
 
 
-## Tokens
-TODO : Add documentation entry for tokens and why we keep them in public
+## Design Tokens & CDN
+To ensure consistency, flexibility, and vendor independence, the project uses a tokens.css file that defines all core design primitives (colors, spacing, typography, radius, shadows, etc.).
 
+### Why this approach?
+- Single source of truth → all Tailwind utilities (bg-bg, text-text, spacing-sm, etc.) map back to these tokens.
+- Decoupled from the app build → tokens are not hard-coded into Tailwind config; instead, they are read from tokens.css at runtime.
+- CDN-ready → the tokens file can be hosted on a CDN or storage bucket (e.g., Azure Blob, S3). Teams can update brand colors or spacing scales without rebuilding the app.
+- Multi-brand support → by swapping token URLs, the same codebase can instantly switch to another theme
+- Design system alignment → this matches strategy of styled vs. unstyled components (job spec [436]) and ensures Tailwind + PrimeVue components can inherit styles consistently.
 
+#### Example
+```css
+:root {
+  --color-primary: #0052cc;
+  --color-accent: #ff6f00;
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+```
+
+```ts
+// tailwind.config.js where applicale (v3)
+
+// for v4 plese refer to @assets/styles/foundations.css
+theme: {
+  extend: {
+    colors: {
+      primary: 'var(--color-primary)',
+      accent: 'var(--color-accent)',
+      bg: 'var(--color-bg)',
+      text: 'var(--color-text)',
+    },
+    spacing: {
+      xs: 'var(--spacing-xs)',
+      sm: 'var(--spacing-sm)',
+      md: 'var(--spacing-md)',
+      lg: 'var(--spacing-lg)',
+    },
+  },
+}
+```
+
+#### How to override via CDN
+- Publish tokens.css to a CDN or storage bucket.
+- Update your index.html or preview.ts (for Storybook):
+TODO: Add env variable support to ensure we can set this on build time.
+`<link rel="stylesheet" href="https://cdn.example.com/design-system/tokens.css" />
+`
+- Reload → your app adopts the new theme instantly.
 
 ## Network Handler
 The `NetworkHandler` and `Adapterz` classes form a lightweight abstraction layer over network requests.
