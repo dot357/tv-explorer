@@ -29,7 +29,7 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
     :href="isLink ? href : undefined"
     :target="isLink ? target : undefined"
     :rel="isLink ? rel : undefined"
-    class="block group focus:outline-none rounded-xl"
+    class="card-focus group"
     :aria-label="computedShowName"
   >
     <article

@@ -42,7 +42,13 @@ const top = useTopRatedShows(12, 2);
         <span  :class="[`text-genre-${genre.toLowerCase()}`, `bg-genre-${genre.toLowerCase()}/14`]">{{ genre }}</span>
       </h2>
       <div class="flex gap-3 overflow-x-auto pb-2">
-        <ShowCard v-for="(show, showIndex) in items" :key="showIndex" :show="show" />
+        <ShowCard 
+            v-for="(show, showIndex) in items" 
+            :key="showIndex" 
+            :show="show"
+            as="a"
+            :href="`/show/${show.id}`"
+            />
       </div>
     </div>
   </section>
