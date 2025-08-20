@@ -2,7 +2,9 @@
 @import '@assets/styles/foundations.css';
 
 @layer components {
-  .card { @apply rounded-md bg-surface/80 ring-1 ring-white/10 p-3 shadow-card; }
+  .card { 
+    @apply rounded-md bg-surface/80 ring-1 min-w-[250px]  md:min-w-[300px] dark:ring-white/10  p-3 ;
+   }
   .chip { @apply rounded-full px-2 py-0.5 text-xs ring-1 ring-white/10 bg-surface; }
   .btn {
   @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm transition 
