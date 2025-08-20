@@ -1,4 +1,4 @@
-import { vi, expect, afterEach } from 'vitest';
+import { vi,  afterEach } from 'vitest';
 
 // Example: reset timers/mocks between tests
 afterEach(() => {

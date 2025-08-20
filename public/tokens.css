@@ -23,6 +23,37 @@
   --space-8: 32px;
   --space-12: 48px;
   --space-16: 64px;
+
+
+  /* Brand genre colors */
+  --genre-action:        12 95% 45%;
+  --genre-adult:         330 55% 45%;
+  --genre-adventure:     28 90% 50%;
+  --genre-anime:         258 75% 60%;
+  --genre-children:      175 70% 45%;
+  --genre-comedy:        48 95% 55%;
+  --genre-crime:         210 10% 35%;
+  --genre-diy:           160 45% 40%;
+  --genre-drama:         260 16% 28%;
+  --genre-espionage:     210 20% 25%;
+  --genre-family:        140 35% 40%;
+  --genre-fantasy:       280 55% 55%;
+  --genre-food:          18 85% 55%;
+  --genre-history:       30 35% 40%;
+  --genre-horror:        355 65% 40%;
+  --genre-legal:         220 18% 28%;
+  --genre-medical:       200 55% 45%;
+  --genre-music:         300 65% 55%;
+  --genre-mystery:       260 20% 22%;
+  --genre-nature:        130 35% 35%;
+  --genre-romance:       340 70% 60%;
+  --genre-science-fiction: 200 80% 55%;
+  --genre-sports:        120 60% 45%;
+  --genre-supernatural:  280 45% 40%;
+  --genre-thriller:      0 65% 40%;
+  --genre-travel:        190 65% 55%;
+  --genre-war:           25 30% 30%;
+  --genre-western:       20 65% 40%;
 }
 
 /* light theme */
@@ -39,4 +70,36 @@
   --brand-surface: 210 30% 10%;
   --brand-text:    210 30% 96%;
   --brand-muted:   210 20% 70%;
+
+
+
+    /* Brand genre colors */
+  --genre-action:        12 95% 70%;
+  --genre-adult:         330 55% 70%;
+  --genre-adventure:     28 90% 80%;
+  --genre-anime:         258 75% 90%;
+  --genre-children:      175 70% 70%;
+  --genre-comedy:        48 95% 85%;
+  --genre-crime:         210 10% 55%;
+  --genre-diy:           160 45% 60%;
+  --genre-drama:         260 16% 38%;
+  --genre-espionage:     210 20% 35%;
+  --genre-family:        140 35% 60%;
+  --genre-fantasy:       280 55% 85%;
+  --genre-food:          18 85% 85%;
+  --genre-history:       30 35% 60%;
+  --genre-horror:        355 65% 60%;
+  --genre-legal:         220 18% 38%;
+  --genre-medical:       200 55% 70%;
+  --genre-music:         300 65% 85%;
+  --genre-mystery:       260 20% 32%;
+  --genre-nature:        130 35% 55%;
+  --genre-romance:       340 70%  90%;
+  --genre-science-fiction: 200 80% 85%;
+  --genre-sports:        120 60% 70%;
+  --genre-supernatural:  280 45% 60%;
+  --genre-thriller:      0 65% 60%;
+  --genre-travel:        190 65% 85%;
+  --genre-war:           25 30% 40%;
+  --genre-western:       20 65% 60%;
 }
