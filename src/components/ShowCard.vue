@@ -39,15 +39,16 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
       <header class="flex items-start gap-2 relative">
 
           
-        <div
-            class="absolute top-0 right-0 flex gap-1 py-2 text-md font-bold bg-bg/90 px-4 rounded-l-sm font-bold user-select-none  items-center"
+            <div
+            class="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded-sm
+            bg-surface/90 ring-1 ring-black/10 dark:ring-white/10
+            text-sm font-medium"
             role="status"
+            aria-live="polite"
             :aria-label="`Average rating: ${show?.rating?.average ?? 'N/A'} out of 10`"
             >
-            <i class="pi pi-star"></i>
-            <span aria-hidden="true">
-                {{ show?.rating?.average ?? 'N/A' }} / 10
-            </span>
+              <i class="pi pi-star" aria-hidden="true"></i>
+              <span>{{ show?.rating?.average ?? 'N/A' }} / 10</span>
             </div>
             <figure class="w-full">
           <!-- Poster with intrinsic sizes + lazy loading -->
@@ -77,8 +78,8 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
       
       </header>
 
-      <h3 class="mt-2 text-sm font-semibold line-clamp-2">
-        {{ computedShowName}}
+      <h3 class="mt-2 text-sm font-semibold line-clamp-2" :title="computedShowName">
+        <span :aria-label="computedShowName">{{ computedShowName }}</span>
       </h3>
 
       <!-- Genres as a list for screen readers -->
@@ -89,13 +90,18 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
         >
 
         
-          <span
-          :class="twMerge(
-              'genre-chip focusable-chip',
+            <span
+              :class="twMerge(
+              'genre-chip focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+              'ring-offset-surface',
               `${genreColorClass(genre)} ${genreBgClass(genre, 100)}`
-          )"
-          aria-hidden="false"
+              )"
+              
           >
+          <!-- 
+          tabindex="0"
+          If I need to decide give a link to the genre page 
+          --> 
             {{ genre }}
           </span>
         </li>

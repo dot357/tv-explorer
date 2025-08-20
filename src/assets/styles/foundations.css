@@ -83,6 +83,7 @@
   .ring-focus { @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-surface; }
   .genre-chip {
     @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xl text-xs font-medium bg-surface;
+    @apply px-2 py-1 text-[11px] md:text-xs rounded-full;
     box-shadow: inset 0 0 0 1px color-mix(in oklab, currentColor 24%, transparent);
   }
  

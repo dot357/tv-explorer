@@ -139,6 +139,7 @@ watch(() => props.focusableSelector, () => {
 <template>
   <section class="w-full">
     <div class="flex items-center gap-2 mb-2 px-2" v-if="showControls">
+      <h2 class="sr-only" :id="`row-${label}`">{{ label }} shows</h2>
        <h2 class="text-xl font-semibold">
         <span>{{ label }}</span>
       </h2>
@@ -147,7 +148,8 @@ watch(() => props.focusableSelector, () => {
           type="button"
           class="btn"
           @click="prev"
-          aria-label="Scroll to previous item"
+          :aria-controls="`scroller-${label}`"
+          aria-label="Scroll {{ label }} left"
         >
           ◀
         </Button>
@@ -155,7 +157,8 @@ watch(() => props.focusableSelector, () => {
           type="button"
           class="btn"
           @click="next"
-          aria-label="Scroll to next item"
+          :aria-controls="`scroller-${label}`"
+          aria-label="Scroll {{ label }} right"
         >
           ▶
         </Button>
@@ -169,8 +172,10 @@ watch(() => props.focusableSelector, () => {
              [scrollbar-width:none] py-2
              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
       role="list"
+      id="scroller-{{label}}"
       :aria-label="label"
       :aria-describedby="helpId"
+      tabindex="0"
     >
       <div class="absolute inset-y-0  left-0 w-4 pointer-events-none"></div>
       <slot />

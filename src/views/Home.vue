@@ -57,21 +57,31 @@ const top = useTopRatedShows(12, 2);
       </template>
     </HorizontalScroller>
 
-    <HorizontalScroller
-      v-for="[genre, items] in buckets" :key="genre"
-      :label="genre"
-      show-controls
-    >
-      <template #default>
-        <ShowCard 
+      <HorizontalScroller
+        v-for="[genre, items] in buckets"
+        :key="genre"
+        :label="genre"
+        show-controls
+      >
+        <template #default>
+          <template v-if="items.length > 0">
+            <ShowCard 
               v-for="(show, showIndex) in items" 
               :key="showIndex" 
               :show="show"
               as="a"
               :href="`/show/${show.id}`"
-              />
-      </template>
-    </HorizontalScroller>
+            />
+          </template>
+          <p
+            v-else
+            class="text-sm text-muted italic"
+            role="status"
+          >
+            No shows found for this genre yet.
+          </p>
+        </template>
+      </HorizontalScroller>
     </div>
 
 
