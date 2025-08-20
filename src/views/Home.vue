@@ -4,6 +4,7 @@ import { showGenres } from '@/data/genres';
 import { useGenreBuckets } from '@/composables/useGenreBuckets';
 import { useTopRatedShows } from '@/composables/useTopRatedShows';
 import ShowCard from '@/components/ShowCard.vue';
+import HorizontalScroller from '@/components/HorizontalScroller.vue';
 
 const { buckets, loading, error, refreshAll } = useGenreBuckets(
   showGenres.map(g => g.name),
@@ -11,6 +12,8 @@ const { buckets, loading, error, refreshAll } = useGenreBuckets(
 );
 
 const top = useTopRatedShows(12, 2);
+
+
 </script>
 
 <template>
@@ -36,9 +39,27 @@ const top = useTopRatedShows(12, 2);
       </div>
     </div>
 
+    <HorizontalScroller
+    
+    v-for="[genre, items] in buckets" :key="genre"
+    :label="genre"
+    show-controls
+    >
+    <template #default>
+      
+       <ShowCard 
+            v-for="(show, showIndex) in items" 
+            :key="showIndex" 
+            :show="show"
+            as="a"
+            :href="`/show/${show.id}`"
+            />
+    </template>
+    </HorizontalScroller>
+
     <!-- Genre buckets -->
-    <div v-for="[genre, items] in buckets" :key="genre" class="space-y-3">
-      <h2 class="text-lg font-semibold">
+    <!-- <div v-for="[genre, items] in buckets" :key="genre" class="space-y-3 py-8">
+      <h2 class="text-xl font-semibold">
         <span  :class="[`text-genre-${genre.toLowerCase()}`, `bg-genre-${genre.toLowerCase()}/14`]">{{ genre }}</span>
       </h2>
       <div class="flex gap-3 overflow-x-auto pb-2">
@@ -50,7 +71,7 @@ const top = useTopRatedShows(12, 2);
             :href="`/show/${show.id}`"
             />
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 

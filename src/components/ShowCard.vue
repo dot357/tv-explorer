@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts" >
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
 import { genreBgClass, genreColorClass } from '@/utils/genreClass';
 import { computed } from 'vue';
@@ -37,7 +37,7 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
     >
       <header class="flex items-start gap-2 relative">
 
-         
+          
         <div
             class="absolute top-0 right-0 flex gap-2 text-sm bg-bg/50 px-4 rounded-l-sm font-bold user-select-none"
             role="status"
@@ -69,6 +69,8 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
           </div>
           <figcaption class="sr-only">{{ computedShowName }}</figcaption>
         </figure>
+
+
          
       
       </header>

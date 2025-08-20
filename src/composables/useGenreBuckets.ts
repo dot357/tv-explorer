@@ -1,9 +1,6 @@
-import { computed, ref, watchEffect } from 'vue';
+import { computed,  watchEffect } from 'vue';
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
 import { useShowsPage } from '@/composables/useShowsPage';
-
-const SPECIALS: Record<string, string> = { 'Science-Fiction': 'Science-Fiction' }; // keep exact, no remap needed
-
 
 export type UseGenreBucketsOptions = {
   pagesToScan?: number;      // how many pages (x250) to scan
