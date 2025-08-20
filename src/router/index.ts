@@ -1,17 +1,15 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-// import views (or use lazy loading)
-import Home from '@/views/Home.vue'
-
 
 // Type-safe routes array
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
   },
-
+  { path: '/search', name: 'Search', component: () => import('@/views/SearchView.vue') },
+  { path: '/show/:id(\\d+)', name: 'ShowDetail', component: () => import('@/views/ShowDetailView.vue'), props: true },
 ]
 
 const router = createRouter({
@@ -20,3 +18,5 @@ const router = createRouter({
 })
 
 export default router
+
+

@@ -4,8 +4,24 @@
 @layer components {
   .card { @apply rounded-md bg-surface/80 ring-1 ring-white/10 p-3 shadow-card; }
   .chip { @apply rounded-full px-2 py-0.5 text-xs ring-1 ring-white/10 bg-surface; }
-  .btn  { 
-    @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm transition focus:outline-none ring-1 ring-white/10 cursor-pointer active:ring-2 active:ring-white/50;
-   }
+  .btn {
+  @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm transition 
+         cursor-pointer ring-1 ring-white/10 
+         focus:outline-none 
+         active:ring-2 active:ring-white/50;
+}
+
+/* Stronger visual clue on focus */
+.btn:focus-visible,
+.btn:focus-within {
+  @apply ring-2 ring-offset-2 ring-primary ring-offset-surface;
+}
   .btn-primary { @apply bg-primary/15 hover:bg-primary/20; }
+
+
+  /* A11y */
+  .sr-only {
+    @apply absolute w-px h-px p-0 m-[-1px] overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0); /* only thing not covered by Tailwind */
+  }
 }

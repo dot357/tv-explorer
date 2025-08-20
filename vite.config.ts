@@ -36,7 +36,7 @@ export default defineConfig({
       {
         test : {
           name: 'unit',
-          environment: 'node',      
+           environment: 'jsdom',   
           globals: true,
           setupFiles: ['src/tests/setup.unit.ts'],
           exclude: ['tests/storybook/**', 'node_modules/**'],

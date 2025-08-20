@@ -1,6 +1,6 @@
 <script lang="ts"></script>
 <template>
-    <div>
+    <div class="absolute top-0 left-0 translate-x-[3500px]">
 <span class="text-genre-action"></span>
 <span class="text-genre-adult"></span>
 <span class="text-genre-adventure"></span>
