@@ -16,7 +16,8 @@ export default defineConfig([
     rules: {
       "no-console": "warn",
       "eqeqeq": ["error", "always"],
-      "curly": ["error", "all"]
+      "curly": ["error", "all"],
+      '@typescript-eslint/no-explicit-any': 'off',
     }
   },
 

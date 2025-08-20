@@ -2,6 +2,7 @@
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
 import { genreBgClass, genreColorClass } from '@/utils/genreClass';
 import { computed } from 'vue';
+import { twMerge } from 'tailwind-merge';
 
 const props = defineProps<{
   show: Show
@@ -33,16 +34,17 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
     :aria-label="computedShowName"
   >
     <article
-      class="card rounded-xl p-2 bg-surface/60 hover:bg-surface ring-1 ring-white/10"
+      class="card rounded-sm p-2 bg-surface/60 hover:bg-surface"
     >
       <header class="flex items-start gap-2 relative">
 
           
         <div
-            class="absolute top-0 right-0 flex gap-2 text-sm bg-bg/50 px-4 rounded-l-sm font-bold user-select-none"
+            class="absolute top-0 right-0 flex gap-1 py-2 text-md font-bold bg-bg/90 px-4 rounded-l-sm font-bold user-select-none  items-center"
             role="status"
             :aria-label="`Average rating: ${show?.rating?.average ?? 'N/A'} out of 10`"
             >
+            <i class="pi pi-star"></i>
             <span aria-hidden="true">
                 {{ show?.rating?.average ?? 'N/A' }} / 10
             </span>
@@ -61,7 +63,7 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
           />
           <div
             v-else
-            class="w-full aspect-[2/3] rounded-xl grid place-items-center bg-muted/10 text-muted text-xs"
+            class="w-full aspect-[2/3] rounded-sm grid place-items-center bg-muted/10 text-muted text-xs"
             role="img"
             :aria-label="posterAlt"
           >
@@ -85,10 +87,14 @@ const computedShowName = computed(() => props.show?.name ?? 'Show N/A');
           v-for="(genre, idx) in show?.genres ?? []"
           :key="idx"
         >
+
+        
           <span
-            class="genre-chip focusable-chip"
-            :class="[genreColorClass(genre), genreBgClass(genre, 14)]"
-            aria-hidden="false"
+          :class="twMerge(
+              'genre-chip focusable-chip',
+              `${genreColorClass(genre)} ${genreBgClass(genre, 100)}`
+          )"
+          aria-hidden="false"
           >
             {{ genre }}
           </span>

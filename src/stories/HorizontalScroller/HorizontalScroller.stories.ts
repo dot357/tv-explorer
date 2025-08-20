@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import HorizontalScroller from '@/components/HorizontalScroller.vue'
 import ShowCard from '@/components/ShowCard.vue'
-import { shows } from './data'
+import { shows } from '../data/data'
 
 
 

@@ -3,6 +3,7 @@ import { Button } from 'primevue';
 import GenerateTailwindStaticsClassesComponent from '@components/GenerateTailwindStaticsClassesComponent.vue'
 import { provideTheme } from '@/composables/theme'
 
+import TestSearchComponent from '@components/TestSearchComponent.vue';
 const { isDark, toggleTheme } = provideTheme()
 </script>
 
@@ -20,6 +21,8 @@ const { isDark, toggleTheme } = provideTheme()
       :aria-checked="isDark"
       :aria-label="isDark ? 'Currently dark theme. Switch to light theme' : 'Currently light theme. Switch to dark theme'"
     />
+
+    <TestSearchComponent />
 
     <!-- Main section with landmark role and focus target -->
     <section id="main-content" role="main" tabindex="-1" class="mt-4">

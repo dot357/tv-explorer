@@ -45,7 +45,9 @@ export class Adapter<T extends RequestMap> {
 
   execute<K extends keyof T>(name: K, params?: Parameters<T[K]>[0], ctx?: RequestCtx) {
     const fn = this.getRequest(name);
-    if (!fn) throw new Error(`Request '${String(name)}' not found.`);
+    if (!fn) {
+      throw new Error(`Request '${String(name)}' not found.`)
+    }
     return fn(params, ctx);
   }
 
@@ -123,7 +125,7 @@ export class NetworkHandler<T extends RequestMap> {
 
           if (attempts < retryCount && isRetryable(ne.status)) {
             attempts += 1;
-            if (retryDelayMs > 0) await new Promise(r => setTimeout(r, retryDelayMs));
+            if (retryDelayMs > 0) {await new Promise(r => setTimeout(r, retryDelayMs));}
             return exec();
           }
           error.value = ne;

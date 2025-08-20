@@ -138,7 +138,7 @@ watch(() => props.focusableSelector, () => {
 
 <template>
   <section class="w-full">
-    <div class="flex items-center gap-2 mb-2" v-if="showControls">
+    <div class="flex items-center gap-2 mb-2 px-2" v-if="showControls">
        <h2 class="text-xl font-semibold">
         <span>{{ label }}</span>
       </h2>
@@ -165,14 +165,14 @@ watch(() => props.focusableSelector, () => {
 
     <div
       ref="container"
-      class="relative flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory
+      class="relative px-2 flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory
              [scrollbar-width:none] py-2
              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
       role="list"
       :aria-label="label"
       :aria-describedby="helpId"
     >
-      <div class="absolute inset-y-0 left-0 w-4 pointer-events-none"></div>
+      <div class="absolute inset-y-0  left-0 w-4 pointer-events-none"></div>
       <slot />
     </div>
 

@@ -24,7 +24,7 @@ const preview: Preview = {
       const Wrapper = defineComponent({
         components: { S },
         setup() {
-          const theme = (context.globals as unknown).theme ?? 'dark';
+          const theme = (context.globals as any).theme ?? 'dark';
 
           // set on mount + watch for toolbar changes
           const setTheme = (t: string) =>
