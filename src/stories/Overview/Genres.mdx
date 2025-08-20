@@ -1,0 +1,72 @@
+# Genres
+## Foundations → Genres (tokens-driven)
+
+This story demonstrates how genre colors are delivered via design tokens and exposed as Tailwind v4 utilities.
+It’s fully themeable (light/dark) and CDN‑friendly.
+
+**Why**
+- Keep colors semantic (text-genre-drama, bg-genre-drama/12) instead of hardcoded hex.
+- Let vendors/branding teams change colors without rebuilding the app: just ship a new tokens.css
+
+**How it works**
+1. Tokens (CDN) — define raw HSL triples:
+```css
+/* /public/tokens.css */
+:root {
+  --genre-drama: 260 16% 28%;
+  --genre-comedy: 48 95% 55%;
+  /* … */
+}
+[data-theme="dark"] {
+  /* optional theme overrides */
+  --genre-drama: 260 16% 38%;
+}
+```
+
+2. Map tokens → Tailwind theme vars (utilities generated):
+```css
+/* /src/assets/styles/foundations.css */
+@import "tailwindcss";
+
+/* wipe default palette so only our tokens exist */
+@theme inline { --color-*: initial; }
+
+/* ensure utilities are emitted */
+@theme static {
+  --color-genre-drama:   hsl(var(--genre-drama));
+  --color-genre-comedy:  hsl(var(--genre-comedy));
+  /* …all genres… */
+}
+```
+
+Tailwind v4 now produces:
+- `text-genre-<slug> → color: var(--color-genre-<slug>)`
+- `bg-genre-<slug> → background-color: var(--color-genre-<slug>)`
+
+**Helpers to build classes safel**
+```ts
+// src/utils/genreClass.ts
+const SPECIALS: Record<string, string> = { 'Science-Fiction': 'science-fiction' };
+const slug = (g: string) => SPECIALS[g] ?? g.toLowerCase();
+
+export const genreColorClass = (g?: string) => (g ? `text-genre-${slug(g)}` : '');
+export const genreBgClass = (g?: string, alpha = 10) =>
+  g ? `bg-genre-${slug(g)}/${alpha}` : '';
+```
+
+**Use in components**
+```html
+<span
+  v-for="g in show.genres"
+  :key="g"
+  class="genre-chip"
+  :class="[genreColorClass(g), genreBgClass(g, 14)]"
+>
+  {{ g }}
+</span>
+```
+
+**Switching colors/themes**
+- Brand update: publish a new tokens.css to your CDN → the app picks it up on reload.
+- Theme switch: toggle `document.documentElement.dataset.theme = 'dark' | 'light'.`
+Tokens in `[data-theme="dark"] { … }` automatically take effect.

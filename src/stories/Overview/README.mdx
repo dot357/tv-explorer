@@ -1,0 +1,42 @@
+# TV Explorer – Tech Overview
+
+A good senior delivers working features.  
+**A great senior delivers a system** that makes building features fast, safe, and consistent for the whole team.
+
+## What’s in this Storybook
+- **Design tokens via `/public/tokens.css`** (CDN-ready, themeable)
+- **Tailwind v4 mapping** in `foundations.css` (`@theme inline/static`, defaults wiped)
+- **PrimeVue + Storybook** integration
+- **Genres tokens** → utilities (`text-genre-*`, `bg-genre-*/opacity`) with live demos
+
+---
+
+## Why tokens + Tailwind v4
+- We use `@theme` to map tokens ⟶ Tailwind utilities.  
+- We wipe Tailwind’s default palette to **enforce** semantic colors.
+
+```css
+/* foundations.css */
+@import "tailwindcss";
+
+@theme inline { --color-*: initial; }      /* lock down defaults */
+
+@theme static {
+  --color-bg: hsl(var(--brand-bg));
+  --color-text: hsl(var(--brand-text));
+  --color-genre-drama: hsl(var(--genre-drama));
+  /* ...all tokens used by utilities... */
+}
+```
+
+## Theme switching
+
+The app/Storybook toggles `<html data-theme="dark|light">`.
+Tokens declare overrides like:
+
+```css
+/* tokens.css */
+:root { --brand-bg: 210 35% 6%; /* ... */ }
+[data-theme="light"] { --brand-bg: 0 0% 100%; }
+```
+

@@ -20,6 +20,38 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
+
+  /* Genre colors */
+
+  --color-genre-action:        hsl(var(--genre-action));
+  --color-genre-adult:         hsl(var(--genre-adult));
+  --color-genre-adventure:     hsl(var(--genre-adventure));
+  --color-genre-anime:         hsl(var(--genre-anime));
+  --color-genre-children:      hsl(var(--genre-children));
+  --color-genre-comedy:        hsl(var(--genre-comedy));
+  --color-genre-crime:         hsl(var(--genre-crime));
+  --color-genre-diy:           hsl(var(--genre-diy));
+  --color-genre-drama:         hsl(var(--genre-drama));
+  --color-genre-espionage:     hsl(var(--genre-espionage));
+  --color-genre-family:        hsl(var(--genre-family));
+  --color-genre-fantasy:       hsl(var(--genre-fantasy));
+  --color-genre-food:          hsl(var(--genre-food));
+  --color-genre-history:       hsl(var(--genre-history));
+  --color-genre-horror:        hsl(var(--genre-horror));
+  --color-genre-legal:         hsl(var(--genre-legal));
+  --color-genre-medical:       hsl(var(--genre-medical));
+  --color-genre-music:         hsl(var(--genre-music));
+  --color-genre-mystery:       hsl(var(--genre-mystery));
+  --color-genre-nature:        hsl(var(--genre-nature));
+  --color-genre-romance:       hsl(var(--genre-romance));
+  --color-genre-science-fiction: hsl(var(--genre-science-fiction));
+  --color-genre-sports:        hsl(var(--genre-sports));
+  --color-genre-supernatural:  hsl(var(--genre-supernatural));
+  --color-genre-thriller:      hsl(var(--genre-thriller));
+  --color-genre-travel:        hsl(var(--genre-travel));
+  --color-genre-war:           hsl(var(--genre-war));
+  --color-genre-western:       hsl(var(--genre-western));
+
   /* spacing -> p-4, gap-3, w-16, etc. */
   --spacing-*: initial;
   --spacing-0: 0px;
@@ -49,5 +81,10 @@
 }
 @layer utilities {
   .ring-focus { @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-surface; }
+  .genre-chip {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xl text-xs font-medium bg-surface;
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, currentColor 24%, transparent);
+  }
+ 
 }
 
