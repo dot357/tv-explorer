@@ -21,6 +21,7 @@
       "@store/*": ["src/store/*"],
       "@api/*": ["src/api/*"],
       "@services/*": ["src/services/*"],
+      "@composables/*": ["src/composables/*"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]

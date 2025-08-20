@@ -1,7 +1,33 @@
 <script setup lang="ts">
 import { Button } from 'primevue';
 import TestComponent from '@components/TestComponent.vue';
+import { onMounted } from 'vue';
+import { NetworkHandler } from '@services/NetworkHandler';
+import { tvAdapter } from '@services/tv.adapter';
+import TestSearchComponent from './components/TestSearchComponent.vue';
 
+
+
+onMounted(async () => {
+  const nh = new NetworkHandler(tvAdapter);
+  const {
+    data,
+    status,
+    loading,
+    error,
+    run
+  } = nh.useRequest('getShowsPage', { page : 0})
+
+   await  run()
+
+   console.log(data.value)
+   console.log(status.value)
+   console.log(loading.value)
+   console.log(error.value)
+
+
+  // console.log(await tvAdapter.execute('getShowsPage', { page : 0 }))
+})
 
 function switchTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -17,7 +43,7 @@ function switchTheme() {
 <template>
   
 
- <div>
+ <div class="">
   <h1>
     TV Explorer
   </h1>
@@ -28,6 +54,8 @@ function switchTheme() {
     Action
   </button>
 </div> -->
+
+<TestSearchComponent />
 
   <section class="card">
     

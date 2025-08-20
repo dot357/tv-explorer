@@ -28,6 +28,7 @@ export default defineConfig({
       '@store': path.resolve(__dirnameApp, 'src/store'),
       '@api': path.resolve(__dirnameApp, 'src/api'),
       '@services': path.resolve(__dirnameApp, 'src/services'),
+      '@composables': path.resolve(__dirnameApp, 'src/composables'),
     }
   },
   test: {

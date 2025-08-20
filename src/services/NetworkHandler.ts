@@ -136,10 +136,14 @@ export class NetworkHandler<T extends RequestMap> {
       await exec();
     };
 
+    
+
     const refresh = () => run();
     const cancel = () => controller?.abort();
 
     return { data, status, loading, error, run, refresh, cancel };
   }
+
+ 
 }
 
