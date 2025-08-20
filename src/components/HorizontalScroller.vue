@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
+import { onMounted, onBeforeUnmount, ref, watch, nextTick, computed } from 'vue'
 import { Button } from 'primevue';
 /**
  * Original createor : https://ryanmulligan.dev/blog/project-keyboard-navigation/
@@ -7,26 +7,18 @@ import { Button } from 'primevue';
  */
 
 type FocusBehavior = 'smooth' | 'auto'
+const DEFAULT_SELECTOR = 'a,button,[role="link"],[role="button"]'
 
-const props = defineProps<{
-  /**
-   * Accessible name for the list (e.g., “Drama shows”).
-   */
+const props = withDefaults(defineProps<{
   label: string
-  /**
-   * Optional id for the help text that says how to navigate.
-   * If omitted, component generates one.
-   */
   describedById?: string
-  /**
-   * When true, shows Prev/Next buttons for mouse users (still fully keyboardable).
-   */
   showControls?: boolean
-  /**
-   * Item selector inside the default slot to focus/scroll. Defaults to links and buttons.
-   */
   focusableSelector?: string
-}>()
+}>(), {
+  showControls: true,
+  // Give a default so the app works without passing anything
+  focusableSelector: DEFAULT_SELECTOR,
+})
 
 const container = ref<HTMLElement | null>(null)
 const helpId = ref(props.describedById || `hs-help-${Math.random().toString(36).slice(2)}`)
@@ -35,11 +27,32 @@ let items: HTMLElement[] = []
 let focusedIndex = -1
 let mediaQuery: MediaQueryList | null = null
 
+
+//normalize the selector
+const sanitizedSelector = computed(() => {
+  const raw = (props.focusableSelector ?? DEFAULT_SELECTOR)
+  const trimmed = typeof raw === 'string' ? raw.trim() : DEFAULT_SELECTOR
+  return trimmed.length ? trimmed : DEFAULT_SELECTOR
+})
+
+//query safely
+function querySafe(root: Element, selector: string) {
+  try {
+    return root.querySelectorAll<HTMLElement>(selector)
+  } catch {
+    // dev hint without crashing your UI
+    if (import.meta.env?.DEV) {
+      // eslint-disable-next-line no-console
+      console.warn(`[HorizontalScroller] Invalid focusableSelector "${selector}", falling back to default.`)
+    }
+    return root.querySelectorAll<HTMLElement>(DEFAULT_SELECTOR)
+  }
+}
+
 const getFocusableItems = () => {
   const root = container.value
   if (!root) return []
-  const selector = props.focusableSelector ?? 'a,button,[role="link"],[role="button"]'
-  return Array.from(root.querySelectorAll<HTMLElement>(selector))
+  return Array.from(querySafe(root, sanitizedSelector.value))
 }
 
 const setRovingTabindex = () => {
@@ -79,7 +92,7 @@ const handleClickItem = (e: Event) => {
   if (idx >= 0) focusedIndex = idx
 }
 
-const itemsSelector = () => props.focusableSelector ?? 'a,button,[role="link"],[role="button"]'
+const itemsSelector = () => sanitizedSelector.value
 
 const next = () => focusItem(focusedIndex === -1 ? 0 : focusedIndex + 1)
 const prev = () => focusItem(focusedIndex <= 0 ? items.length - 1 : focusedIndex - 1)
@@ -102,6 +115,14 @@ onMounted(() => {
       focusItem(0, 'auto')
     }
   }, { once: true, capture: true })
+
+
+  const mutationObserver = new MutationObserver(() => {
+    items = getFocusableItems()
+    setRovingTabindex()
+  })
+
+   if (container.value) mutationObserver.observe(container.value, { childList: true, subtree: true })
 })
 
 onBeforeUnmount(() => {

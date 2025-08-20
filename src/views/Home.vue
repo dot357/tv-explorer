@@ -57,21 +57,7 @@ const top = useTopRatedShows(12, 2);
     </template>
     </HorizontalScroller>
 
-    <!-- Genre buckets -->
-    <!-- <div v-for="[genre, items] in buckets" :key="genre" class="space-y-3 py-8">
-      <h2 class="text-xl font-semibold">
-        <span  :class="[`text-genre-${genre.toLowerCase()}`, `bg-genre-${genre.toLowerCase()}/14`]">{{ genre }}</span>
-      </h2>
-      <div class="flex gap-3 overflow-x-auto pb-2">
-        <ShowCard 
-            v-for="(show, showIndex) in items" 
-            :key="showIndex" 
-            :show="show"
-            as="a"
-            :href="`/show/${show.id}`"
-            />
-      </div>
-    </div> -->
+
   </section>
 </template>
 

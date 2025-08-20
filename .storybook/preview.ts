@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/vue3';
 import { setup } from '@storybook/vue3';
 import { watch, defineComponent } from 'vue';
 import PrimeVue from 'primevue/config';
+import Button from 'primevue/button'
 
 // styles
 import 'primeicons/primeicons.css';
@@ -12,6 +13,7 @@ import '../src/assets/styles/recipes.css';
 // register Vue plugins
 setup((app) => {
   app.use(PrimeVue);
+  app.component('ButtonComponent', Button);
 });
 
 const preview: Preview = {
