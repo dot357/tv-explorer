@@ -29,6 +29,9 @@ watch(isOpen, async (open) => {
     document.documentElement.style.overflow = 'hidden'
   } else {
     document.documentElement.style.overflow = ''
+    if(inputRef.value === undefined || inputRef.value?.focus === undefined){
+      return
+    }
     inputRef.value?.focus()
   }
 })

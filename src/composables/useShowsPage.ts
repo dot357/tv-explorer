@@ -1,6 +1,6 @@
 import { computed, ref, watchEffect } from 'vue';
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
-import { nh } from '@/services/nh';
+import { nh } from '../services/nh';
 
 const pageCache = new Map<number, Show[]>();
 

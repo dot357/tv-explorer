@@ -1,7 +1,7 @@
 import type { CastMember, CrewMember, Episode, Season, Show } from "@/types/adapters/tv.adaptersTypes";
-import { Adapter } from "@services/NetworkHandler";
+import { Adapter } from "../services/NetworkHandler";
 import type { NetResult, RequestFn } from "@/types/NetworkHandlerTypes";
-import { tvApi } from "@api/tvApi";
+import { tvApi } from "../api/tvApi";
 
 type TvRequests = {
   getShowsPage: RequestFn<{ page?: number }, Show[]>;
@@ -32,7 +32,7 @@ export const tvAdapter = new Adapter<TvRequests>({
 
   async getSeasons(params) {
     const { id } = params ?? ({} as { id: number });
-    if (id == null) throw new Error('getSeasons: "id" is required');
+    if (id == null) {throw new Error('getSeasons: "id" is required');}
     const res = await tvApi.get<Season[]>(`/shows/${id}/seasons`);
     return { data: res.data, status: res.status } satisfies NetResult<Season[]>;
   },
@@ -43,21 +43,21 @@ export const tvAdapter = new Adapter<TvRequests>({
       const res = await tvApi.get<Episode[]>(`/seasons/${seasonId}/episodes`);
       return { data: res.data, status: res.status } satisfies NetResult<Episode[]>;
     }
-    if (id == null) throw new Error('getEpisodes: "id" is required when "seasonId" is not provided');
+    if (id == null) {throw new Error('getEpisodes: "id" is required when "seasonId" is not provided');}
     const res = await tvApi.get<Episode[]>(`/shows/${id}/episodes`);
     return { data: res.data, status: res.status } satisfies NetResult<Episode[]>;
   },
 
   async getCast(params) {
     const { id } = params ?? ({} as { id: number });
-    if (id == null) throw new Error('getCast: "id" is required');
+    if (id == null) {throw new Error('getCast: "id" is required');}
     const res = await tvApi.get<CastMember[]>(`/shows/${id}/cast`);
     return { data: res.data, status: res.status } satisfies NetResult<CastMember[]>;
   },
 
   async getCrew(params) {
     const { id } = params ?? ({} as { id: number });
-    if (id == null) throw new Error('getCrew: "id" is required');
+    if (id == null) {throw new Error('getCrew: "id" is required');}
     const res = await tvApi.get<CrewMember[]>(`/shows/${id}/crew`);
     return { data: res.data, status: res.status } satisfies NetResult<CrewMember[]>;
   },

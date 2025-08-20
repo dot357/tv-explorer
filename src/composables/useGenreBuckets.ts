@@ -1,6 +1,6 @@
 import { computed,  watchEffect } from 'vue';
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
-import { useShowsPage } from '@/composables/useShowsPage';
+import { useShowsPage } from '../composables/useShowsPage';
 
 export type UseGenreBucketsOptions = {
   pagesToScan?: number;      // how many pages (x250) to scan
@@ -30,16 +30,18 @@ export function useGenreBuckets(genres: string[], opts: UseGenreBucketsOptions =
   // Build buckets
   const buckets = computed(() => {
     const map = new Map<string, Show[]>();
-    for (const g of genres) map.set(g, []);
+    for (const g of genres){
+       map.set(g, [])
+    };
 
     for (const show of all.value) {
       const rating = show.rating?.average ?? 0;
-      if (rating < minRating) continue;
+      if (rating < minRating) {continue;}
 
       for (const g of show.genres ?? []) {
-        if (!map.has(g)) continue;
+        if (!map.has(g)) {continue;}
         const arr = map.get(g)!;
-        if (arr.length < perGenre) arr.push(show);
+        arr.push(show)
       }
     }
 

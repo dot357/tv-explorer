@@ -24,8 +24,7 @@ const { isDark, toggleTheme } = provideTheme()
             @click="toggleTheme"
             role="switch"
             :aria-checked="isDark"
-            :aria-label="isDark ? 'Currently dark theme. Switch to light theme' : 'Currently light theme. Switch to dark theme'"
-            v-tooltip.focus.top="'Enter your username'" 
+            :aria-label="isDark ? 'Currently dark theme. Switch to light theme' : 'Currently light theme. Switch to dark theme'"           
         />
 
     </header>

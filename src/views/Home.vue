@@ -6,12 +6,17 @@ import ShowCard from '@/components/ShowCard.vue';
 import HorizontalScroller from '@/components/HorizontalScroller.vue';
 import { Button } from 'primevue';
 import SkeletonGenreRow from '@/components/SkeletonGenreRow.vue';
+
+
 const { buckets, loading, error, refreshAll } = useGenreBuckets(
   showGenres.map(g => g.name),
   { pagesToScan: 2, perGenreLimit: 20, minRating: 0 }
 );
 
 const top = useTopRatedShows(12, 2);
+
+
+
 
 
 </script>
