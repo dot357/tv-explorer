@@ -28,7 +28,39 @@ nvm use
 - [ ] [Add bug report]()
 
 
+## 🚀 Development
 
+### Run the development server
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the Vite dev server with hot reloading:
+
+```bash
+npm run dev
+```
+
+Run the Storybook dev server:
+
+```bash
+npm run storybook
+```
+
+Run the unit tests:
+
+```bash
+npm run test:unit
+```
+
+Run the unit tests in watch mode:
+
+```bash
+npm run test:watch
+```
 
 <!-- https://primevue.org/theming/unstyled/ -->
 ### 🏗️ Architectural Reasoning: Unstyled Components
