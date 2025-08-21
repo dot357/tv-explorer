@@ -222,3 +222,70 @@ Expose the app on port 3000:
 **3. Access the app**
 Open your browser at:
 `http://localhost:3000`
+
+
+
+
+### Component Architecture Diagram
+
+```mermaid
+flowchart TD
+  %% Layers
+  subgraph Pages
+    Home[Home.vue\n(Discover & genre rows)]
+    Details[ShowDetails.vue\n(Show info)]
+    SearchPage[Search.vue\n(Search results)]
+  end
+
+  subgraph Composables
+    GB[useGenreBuckets\n(group by genre, pagination, limits)]
+    TR[useTopRatedShows\n(fetch top-rated)]
+    SR[useSearch\n(debounced query, results)]
+  end
+
+  subgraph UI_Components[UI Components]
+    HS[HorizontalScroller.vue]
+    SC[ShowCard.vue]
+    SGR[SkeletonGenreRow.vue]
+    Btn[PrimeVue Button]
+    Input[PrimeVue InputText]
+  end
+
+  subgraph Network[Network Abstraction]
+    API[apiClient.ts\n(axios instance, interceptors)]
+    ShowSvc[shows.service.ts\n(domain-specific fetchers)]
+  end
+
+  subgraph External[External Services]
+    TVMaze[(TVMaze API)]
+  end
+
+  %% Page -> Composables
+  Home --> GB
+  Home --> TR
+  SearchPage --> SR
+  Details --> ShowSvc
+
+  %% Composables -> Network
+  GB --> ShowSvc
+  TR --> ShowSvc
+  SR --> ShowSvc
+
+  %% Network -> External
+  ShowSvc --> API --> TVMaze
+
+  %% Pages -> UI
+  Home --> HS
+  Home --> SGR
+  Home --> SC
+  Home --> Btn
+  Home --> Input
+
+  SearchPage --> SC
+  SearchPage --> Input
+
+  Details --> SC
+  Details --> Btn
+
+  %% UI composition
+  HS --> SC
