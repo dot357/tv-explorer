@@ -222,3 +222,94 @@ Expose the app on port 3000:
 **3. Access the app**
 Open your browser at:
 `http://localhost:3000`
+
+
+
+
+### Component Architecture Diagram
+
+```mermaid
+flowchart TD
+  %% Layers
+  subgraph Pages
+    Home[Home.vue<br/>Discover + genre rows]
+    Details[ShowDetails.vue<br/>Show info]
+    SearchPage[Search.vue<br/>Search results]
+  end
+
+  subgraph Composables
+    GB[useGenreBuckets<br/>group by genre, pagination, limits]
+    TR[useTopRatedShows<br/>fetch top-rated]
+    SR[useSearch<br/>debounced query, results]
+  end
+
+  subgraph UI_Components["UI Components"]
+    HS[HorizontalScroller.vue]
+    SC[ShowCard.vue]
+    SGR[SkeletonGenreRow.vue]
+    Btn[PrimeVue Button]
+    Input[PrimeVue InputText]
+  end
+
+  subgraph Network["Network Abstraction"]
+    API[apiClient.ts<br/>axios instance, interceptors]
+    ShowSvc[shows.service.ts<br/>domain-specific fetchers]
+  end
+
+  subgraph External["External Services"]
+    TVMaze[(TVMaze API)]
+  end
+
+  %% Page -> Composables
+  Home --> GB
+  Home --> TR
+  SearchPage --> SR
+  Details --> ShowSvc
+
+  %% Composables -> Network
+  GB --> ShowSvc
+  TR --> ShowSvc
+  SR --> ShowSvc
+
+  %% Network -> External
+  ShowSvc --> API --> TVMaze
+
+  %% Pages -> UI
+  Home --> HS
+  Home --> SGR
+  Home --> SC
+  Home --> Btn
+  Home --> Input
+
+  SearchPage --> SC
+  SearchPage --> Input
+
+  Details --> SC
+  Details --> Btn
+
+  %% UI composition
+  HS --> SC
+
+```
+
+
+### VsCode Settings
+
+If you use VsCode, you can add the following to your `settings.json` to get syntax highlighting and linting:
+```json
+{
+  "eslint.enable": true,
+  "eslint.run": "onType",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ]
+}
+```
+
