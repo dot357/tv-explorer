@@ -232,18 +232,18 @@ Open your browser at:
 flowchart TD
   %% Layers
   subgraph Pages
-    Home[Home.vue\n(Discover & genre rows)]
-    Details[ShowDetails.vue\n(Show info)]
-    SearchPage[Search.vue\n(Search results)]
+    Home[Home.vue<br/>Discover + genre rows]
+    Details[ShowDetails.vue<br/>Show info]
+    SearchPage[Search.vue<br/>Search results]
   end
 
   subgraph Composables
-    GB[useGenreBuckets\n(group by genre, pagination, limits)]
-    TR[useTopRatedShows\n(fetch top-rated)]
-    SR[useSearch\n(debounced query, results)]
+    GB[useGenreBuckets<br/>group by genre, pagination, limits]
+    TR[useTopRatedShows<br/>fetch top-rated]
+    SR[useSearch<br/>debounced query, results]
   end
 
-  subgraph UI_Components[UI Components]
+  subgraph UI_Components["UI Components"]
     HS[HorizontalScroller.vue]
     SC[ShowCard.vue]
     SGR[SkeletonGenreRow.vue]
@@ -251,12 +251,12 @@ flowchart TD
     Input[PrimeVue InputText]
   end
 
-  subgraph Network[Network Abstraction]
-    API[apiClient.ts\n(axios instance, interceptors)]
-    ShowSvc[shows.service.ts\n(domain-specific fetchers)]
+  subgraph Network["Network Abstraction"]
+    API[apiClient.ts<br/>axios instance, interceptors]
+    ShowSvc[shows.service.ts<br/>domain-specific fetchers]
   end
 
-  subgraph External[External Services]
+  subgraph External["External Services"]
     TVMaze[(TVMaze API)]
   end
 
@@ -289,3 +289,5 @@ flowchart TD
 
   %% UI composition
   HS --> SC
+
+```
