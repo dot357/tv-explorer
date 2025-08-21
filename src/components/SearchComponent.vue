@@ -6,8 +6,9 @@ import { Button } from 'primevue'
 import InputText from 'primevue/inputtext';
 
 // your existing setup
-const search = useSearchShows('', { debounceMs: 300 })
+const search = useSearchShows('', { debounceMs: 600 })
 const topNine = computed(() => (search.sorted.value ?? []).slice(0, 9))
+const computedBaseUrl = computed(() => import.meta.env.BASE_URL);
 
 // open overlay when there is any query
 const isOpen = computed(() =>
@@ -164,7 +165,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
                 <ShowCard
                   :show="hit.show"
                   as="a"
-                  :href="`/show/${hit.show.id}`"
+                  :href="`${computedBaseUrl}show/${hit.show.id}`"
                   class="h-full"
                 />
               </li>
