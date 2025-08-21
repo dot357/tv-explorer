@@ -6,6 +6,7 @@ import ShowCard from '@/components/ShowCard.vue';
 import HorizontalScroller from '@/components/HorizontalScroller.vue';
 import { Button } from 'primevue';
 import SkeletonGenreRow from '@/components/SkeletonGenreRow.vue';
+import { computed } from 'vue';
 
 
 const { buckets, loading, error, refreshAll } = useGenreBuckets(
@@ -17,50 +18,62 @@ const top = useTopRatedShows(12, 2);
 
 
 
-
+const computedBaseUrl = computed(() => import.meta.env.BASE_URL);
 
 </script>
 
 <template>
-    <section class="px-4 md:px-6 py-6 space-y-8">
-      
+  <section class="px-4 md:px-6 py-6 space-y-8">
     <header class="flex items-center justify-between">
-      <h1 class="text-2xl font-semibold">Discover</h1>
+      <h1 class="text-2xl font-semibold">
+        Discover
+      </h1>
       <Button 
         class="btn" 
         label="Refresh" 
         :icon="`pi pi-refresh ${loading === true ? 'pi-spin pi-spinner' :''}`" 
         @click="refreshAll"
-        
-        />
+      />
     </header>
 
-    <div v-if="error" class="text-error">Failed to load: {{ error.message }}</div>
-    <div v-else-if="loading" class="text-muted">
-      <SkeletonGenreRow label="Top Rated" :count="3" />
+    <div
+      v-if="error"
+      class="text-error"
+    >
+      Failed to load: {{ error.message }}
+    </div>
+    <div
+      v-else-if="loading"
+      class="text-muted"
+    >
+      <SkeletonGenreRow
+        label="Top Rated"
+        :count="3"
+      />
 
       <SkeletonGenreRow  
         v-for="(genre, genreIndex) in showGenres"
         :key="genreIndex"
-        :label="genre.name" :count="3"
+        :label="genre.name"
+        :count="3"
       />
     </div>
     <div v-else>
       <HorizontalScroller
         label="Top Rated"
         show-controls
-        describedById="top-rated-help"
+        described-by-id="top-rated-help"
       >
-      <template #default>
-        <ShowCard 
-          v-for="(show, showIndex) in top.items.value" 
-          :key="showIndex" 
-          :show="show"
-          as="a"
-          :href="`/show/${show.id}`"
+        <template #default>
+          <ShowCard 
+            v-for="(show, showIndex) in top.items.value" 
+            :key="showIndex" 
+            :show="show"
+            as="a"
+            :href="`${computedBaseUrl}show/${show.id}`"
           />
-      </template>
-    </HorizontalScroller>
+        </template>
+      </HorizontalScroller>
 
       <HorizontalScroller
         v-for="[genre, items] in buckets"
@@ -75,7 +88,7 @@ const top = useTopRatedShows(12, 2);
               :key="showIndex" 
               :show="show"
               as="a"
-              :href="`/show/${show.id}`"
+              :href="`${computedBaseUrl}show/${show.id}`"
             />
           </template>
           <p
@@ -88,8 +101,6 @@ const top = useTopRatedShows(12, 2);
         </template>
       </HorizontalScroller>
     </div>
-
-
   </section>
 </template>
 
