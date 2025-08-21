@@ -11,8 +11,8 @@ export function useSearchShows(initial = '', options?: { debounceMs?: number; pa
   const query = ref(initial);
   const debounceMs = options?.debounceMs ?? 300;
 
-    //   Node.Timer
-  let debounceTimer: any;
+    //   Node.Timer deprecated
+  let debounceTimer : NodeJS.Timeout;
 
 
     // eases for search andd also can be calleable from outside

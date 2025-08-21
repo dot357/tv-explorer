@@ -8,7 +8,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: () => import('@/views/Home.vue'),
   },
-  { path: '/search', name: 'Search', component: () => import('@/views/SearchView.vue') },
   { path: '/show/:id(\\d+)', name: 'ShowDetail', component: () => import('@/views/ShowDetailView.vue'), props: true },
 ]
 
