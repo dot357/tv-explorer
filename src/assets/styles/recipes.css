@@ -128,7 +128,5 @@
     @apply bg-muted/10;
   }
 
-  [data-pc-name="pcpaginator"] [data-pc-group-section="pagebutton"]:focus-visible {
-
-  }
+  
 }

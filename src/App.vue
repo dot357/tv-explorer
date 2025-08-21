@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import GenerateTailwindStaticsClassesComponent from '@components/GenerateTailwindStaticsClassesComponent.vue'
 import SearchComponent from '@/components/SearchComponent.vue';
 import AppHeader from '@components/AppHeader.vue';
+import TailwindGenerator from '@/components/TailwindGenerator.vue'
 </script>
 
 <template>
@@ -22,6 +22,6 @@ import AppHeader from '@components/AppHeader.vue';
       <router-view />
     </section>
 
-    <GenerateTailwindStaticsClassesComponent />
+    <TailwindGenerator />
   </div>
 </template>

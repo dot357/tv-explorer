@@ -1,4 +1,4 @@
-<script lang="ts"></script>
+<script lang="ts" setup></script>
 <template>
     <div class="absolute top-0 left-0 translate-x-[3500px]">
 <span class="text-genre-action"></span>
