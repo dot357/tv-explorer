@@ -14,6 +14,7 @@ const __dirnameApp = path.dirname(__filename);
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
+  base : '/tv-explorer/',
   server: {
     port: 3000
   },

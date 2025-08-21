@@ -37,7 +37,7 @@ watch(isOpen, async (open) => {
 })
 
 // ESC key on window
-const onKeydown = (e: KeyboardEvent) => { if (e.key === 'Escape' && isOpen.value) close() }
+const onKeydown = (e: KeyboardEvent) => { if (e.key === 'Escape' && isOpen.value) {close()} }
 onMounted(() => window.addEventListener('keydown', onKeydown))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 </script>
@@ -45,8 +45,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 <template>
   <div class="space-y-3">
     <div class="flex items-center gap-2 relative">
-      
-      <label for="show-search" class="sr-only">Search shows</label>
+      <label
+        for="show-search"
+        class="sr-only"
+      >Search shows</label>
       
       <InputText
         id="show-search"
@@ -62,14 +64,17 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 
       <Button
         label="Clear"
-        @click="close"
         :disabled="!search.query.value || search.loading.value"
         class="btn absolute right-[10px] bg-surface"
         aria-label="Clear search input"
+        @click="close"
       />
     </div>
 
-    <p id="search-help" class="sr-only">
+    <p
+      id="search-help"
+      class="sr-only"
+    >
       Type a show name and press Enter or keep typing to see results.
     </p>
 
@@ -96,11 +101,17 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
               overscroll-contain"
       >
         <header class="flex flex-col items-start md:flex-row md:items-center justify-between gap-2 sticky top-0 bg-surface/95 backdrop-blur-sm py-2 -mx-4 px-4 md:mx-0 md:px-0 z-10">
-          <h2 id="search-results-title" class="text-lg md:text-xl font-semibold">
-          Search results
+          <h2
+            id="search-results-title"
+            class="text-lg md:text-xl font-semibold"
+          >
+            Search results
           </h2>
-          <p id="search-results-desc" class="text-sm text-muted">
-          Press Esc to close. Click outside the panel or use the Close button.
+          <p
+            id="search-results-desc"
+            class="text-sm text-muted"
+          >
+            Press Esc to close. Click outside the panel or use the Close button.
           </p>
         </header>
         <!-- Scrollable body -->
@@ -109,15 +120,33 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
                 [touch-action:pan-y]  /* smoother iOS scrolling */"
           :aria-busy="search.loading.value ? 'true' : 'false'"
         >
-          <p v-if="search.loading.value" class="text-sm">Searching…</p>
-          <p v-else-if="search.error.value" class="text-sm text-error">Oops: {{ search.error.value.message }}</p>
+          <p
+            v-if="search.loading.value"
+            class="text-sm"
+          >
+            Searching…
+          </p>
+          <p
+            v-else-if="search.error.value"
+            class="text-sm text-error"
+          >
+            Oops: {{ search.error.value.message }}
+          </p>
 
           <template v-else>
-            <p v-if="!topNine.length" class="text-sm text-muted italic" role="status">
+            <p
+              v-if="!topNine.length"
+              class="text-sm text-muted italic"
+              role="status"
+            >
               No shows found. Try another search.
             </p>
 
-            <p v-else class="text-sm text-muted mb-2" aria-live="polite">
+            <p
+              v-else
+              class="text-sm text-muted mb-2"
+              aria-live="polite"
+            >
               Showing {{ topNine.length }} result{{ topNine.length === 1 ? '' : 's' }} (max 9)
             </p>
 
@@ -127,7 +156,11 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
               role="list"
               aria-label="Search results grid"
             >
-              <li v-for="hit in topNine" :key="hit.show.id" role="listitem">
+              <li
+                v-for="hit in topNine"
+                :key="hit.show.id"
+                role="listitem"
+              >
                 <ShowCard
                   :show="hit.show"
                   as="a"
@@ -139,7 +172,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
           </template>
         </div>
       </section>
-
     </div>
   </div>
 </template>

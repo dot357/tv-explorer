@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
 import { useShowsPage } from './useShowsPage';
 
-export function useTopRatedShows(limit = 12, pagesToScan = 2, minVotes = 0) {
+export function useTopRatedShows(limit = 12, pagesToScan = 2) {
   const pages = Array.from({ length: pagesToScan }, (_, i) => useShowsPage(i));
 
   const loading = computed(() => pages.some(p => p.loading.value));

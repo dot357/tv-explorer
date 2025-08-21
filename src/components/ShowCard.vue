@@ -1,4 +1,4 @@
-<script setup lang="ts" >
+<script lang="ts" setup>
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
 import { genreBgClass, genreColorClass } from '@/utils/genreClass';
 import { computed } from 'vue';

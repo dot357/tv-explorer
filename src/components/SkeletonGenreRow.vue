@@ -19,7 +19,7 @@ const n = Array.from({ length: Math.max(1, (typeof props.count === 'number' ? pr
       class="relative flex gap-4 overflow-x-auto snap-x snap-mandatory  py-2 [scrollbar-width:none]"
       role="list"
       aria-busy="true"
-      aria-label="Loading {{ label || 'row' }}"
+      :aria-label="`Loading ${label || 'row'}`"
     >
       <div
         v-for="(_, i) in n"

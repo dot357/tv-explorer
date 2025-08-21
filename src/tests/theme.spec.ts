@@ -41,18 +41,6 @@ describe('theme composable', () => {
     }))
   }
 
-  function mountWithConsumer() {
-    return mount(defineComponent({
-      setup() {
-        provideTheme()
-        const { theme, isDark, toggleTheme } = useTheme()
-        return { theme, isDark, toggleTheme }
-      },
-      render() {
-        return h('div')
-      }
-    }))
-  }
 
   it('initializes theme to light by default', () => {
     const wrapper = mountWithProvider()

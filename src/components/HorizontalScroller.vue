@@ -149,7 +149,7 @@ watch(() => props.focusableSelector, () => {
           class="btn"
           @click="prev"
           :aria-controls="`scroller-${label}`"
-          aria-label="Scroll {{ label }} left"
+          :aria-label="`Scroll {{ label }} left`"
         >
           ◀
         </Button>
@@ -158,7 +158,7 @@ watch(() => props.focusableSelector, () => {
           class="btn"
           @click="next"
           :aria-controls="`scroller-${label}`"
-          aria-label="Scroll {{ label }} right"
+          :aria-label="`Scroll {{ label }} right`"
         >
           ▶
         </Button>

@@ -16,7 +16,8 @@
     "test:sb": "vitest run --project storybook",
     "test:sb:ui": "vitest --project storybook --ui",
     "lint": "eslint . --ext .js,.ts,.vue",
-    "lint:fix": "eslint . --ext .js,.ts,.vue --fix"
+    "lint:fix": "eslint . --ext .js,.ts,.vue --fix",
+    "postbuild": "cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "@primeuix/themes": "^1.2.3",
