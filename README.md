@@ -291,3 +291,25 @@ flowchart TD
   HS --> SC
 
 ```
+
+
+### VsCode Settings
+
+If you use VsCode, you can add the following to your `settings.json` to get syntax highlighting and linting:
+```json
+{
+  "eslint.enable": true,
+  "eslint.run": "onType",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ]
+}
+```
+

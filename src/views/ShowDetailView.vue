@@ -56,21 +56,50 @@ function pluralize(count: number, singular: string, plural: string) {
 </script>
 
 <template>
-  <section class="p-4" aria-labelledby="show-title">
-    <button class="btn mb-3" @click="router.back()" aria-label="Go back to previous page">
+  <section
+    class="p-4"
+    aria-labelledby="show-title"
+  >
+    <button
+      class="btn mb-3"
+      aria-label="Go back to previous page"
+      @click="router.back()"
+    >
       ← Back
     </button>
 
-    <div v-if="loading" role="status" aria-live="polite" class="space-y-2">
-      <div class="skeleton skeleton-line" style="--lines:1; --l-h:24px; width: 60%"></div>
-      <div class="skeleton skeleton-rect" style="height: 180px;"></div>
-      <div class="skeleton skeleton-line" style="--lines:3;"></div>
+    <div
+      v-if="loading"
+      role="status"
+      aria-live="polite"
+      class="space-y-2"
+    >
+      <div
+        class="skeleton skeleton-line"
+        style="--lines:1; --l-h:24px; width: 60%"
+      />
+      <div
+        class="skeleton skeleton-rect"
+        style="height: 180px;"
+      />
+      <div
+        class="skeleton skeleton-line"
+        style="--lines:3;"
+      />
     </div>
 
     <div v-else-if="error">
-      <p class="text-red-500" role="alert">
+      <p
+        class="text-red-500"
+        role="alert"
+      >
         Couldn’t load the show.
-        <button class="btn ml-2" @click="refresh">Try again</button>
+        <button
+          class="btn ml-2"
+          @click="refresh"
+        >
+          Try again
+        </button>
       </p>
     </div>
 
@@ -82,17 +111,37 @@ function pluralize(count: number, singular: string, plural: string) {
     >
       <div class="absolute top-0 left-0 right-0 w-full h-[800px]" />
       <div class="z-10 bg-surface/90 backdrop-blur w-full h-[400px] mt-auto px-4 py-4">
-        <h1 id="show-title" class="text-2xl font-semibold mb-2">{{ show.name }}</h1>
+        <h1
+          id="show-title"
+          class="text-2xl font-semibold mb-2"
+        >
+          {{ show.name }}
+        </h1>
 
         <p class="mb-2">
-          <span class="chip" aria-label="Show rating">
-            <i class="pi pi-star" aria-hidden="true"></i> {{ show.rating?.average ?? 'N/A' }}
+          <span
+            class="chip"
+            aria-label="Show rating"
+          >
+            <i
+              class="pi pi-star"
+              aria-hidden="true"
+            /> {{ show.rating?.average ?? 'N/A' }}
           </span>
-          <span class="chip ml-2" v-if="show.premiered">Premiered: {{ show.premiered }}</span>
-          <span class="chip ml-2" v-if="show.language">Language: {{ show.language }}</span>
+          <span
+            v-if="show.premiered"
+            class="chip ml-2"
+          >Premiered: {{ show.premiered }}</span>
+          <span
+            v-if="show.language"
+            class="chip ml-2"
+          >Language: {{ show.language }}</span>
         </p>
 
-        <p class="text-sm opacity-80 mb-2" v-if="show.genres?.length">
+        <p
+          v-if="show.genres?.length"
+          class="text-sm opacity-80 mb-2"
+        >
           <span
             v-for="genre in show.genres"
             :key="genre"
@@ -107,8 +156,8 @@ function pluralize(count: number, singular: string, plural: string) {
         </p>
 
         <div
-          class="prose prose-invert max-w-none h-[200px] overflow-scroll md:h-[unset] md:overflow-auto"
           v-if="show.summary"
+          class="prose prose-invert max-w-none h-[200px] overflow-scroll md:h-[unset] md:overflow-auto"
           v-html="show.summary"
         />
 
@@ -124,63 +173,111 @@ function pluralize(count: number, singular: string, plural: string) {
       </div>
     </article>
 
-    <p v-else>No data for this show.</p>
+    <p v-else>
+      No data for this show.
+    </p>
 
     <!-- Episodes Table -->
-    <section class="mt-8" aria-labelledby="episodes-heading">
-      <h2 id="episodes-heading" class="text-xl font-semibold mb-3">Episodes</h2>
+    <section
+      class="mt-8"
+      aria-labelledby="episodes-heading"
+    >
+      <h2
+        id="episodes-heading"
+        class="text-xl font-semibold mb-3"
+      >
+        Episodes
+      </h2>
 
-      <div v-if="episodesLoading" role="status" aria-live="polite" class="space-y-2">
-        <div class="skeleton skeleton-line" style="--lines:1; width: 30%"></div>
-        <div class="skeleton skeleton-line" style="--lines:4;"></div>
+      <div
+        v-if="episodesLoading"
+        role="status"
+        aria-live="polite"
+        class="space-y-2"
+      >
+        <div
+          class="skeleton skeleton-line"
+          style="--lines:1; width: 30%"
+        />
+        <div
+          class="skeleton skeleton-line"
+          style="--lines:4;"
+        />
       </div>
 
-      <div v-else-if="episodesError" role="alert" class="text-red-500">
+      <div
+        v-else-if="episodesError"
+        role="alert"
+        class="text-red-500"
+      >
         Couldn’t load episodes.
-        <button class="btn ml-2" @click="refreshEpisodes">Try again</button>
+        <button
+          class="btn ml-2"
+          @click="refreshEpisodes"
+        >
+          Try again
+        </button>
       </div>
-      <div  v-else >
+      <div v-else>
         <DataTable
         
           :value="episodes"
-          dataKey="id"
+          data-key="id"
           :paginator="true"
           :rows="20"
-          :rowsPerPageOptions="[10, 20, 50]"
-          sortField="airdate"
-          :sortOrder="1"
-          responsiveLayout="scroll"
-          tableStyle="min-width: 640px"
+          :rows-per-page-options="[10, 20, 50]"
+          sort-field="airdate"
+          :sort-order="1"
+          responsive-layout="scroll"
+          table-style="min-width: 640px"
           aria-labelledby="episodes-heading"
         >
           <template #header>
             <div class="flex items-center justify-between">
               <p 
-                  class="font-medium" 
-                  aria-live="polite" 
-                  role="status"
-                >
-                  Total {{ episodes.length }} {{ pluralize(episodes.length, 'episode', 'episodes') }}
-                </p>
-              <button class="btn" @click="refreshEpisodes" aria-label="Refresh episodes">Refresh</button>
+                class="font-medium" 
+                aria-live="polite" 
+                role="status"
+              >
+                Total {{ episodes.length }} {{ pluralize(episodes.length, 'episode', 'episodes') }}
+              </p>
+              <button
+                class="btn"
+                aria-label="Refresh episodes"
+                @click="refreshEpisodes"
+              >
+                Refresh
+              </button>
             </div>
           </template>
 
-          <Column header="Code" >
+          <Column header="Code">
             <template #body="{ data }">
               {{ formatCode(data.season, data.number) }}
             </template>
           </Column>
 
-          <Column field="name" header="Title" :sortable="true" />
+          <Column
+            field="name"
+            header="Title"
+            :sortable="true"
+          />
 
-          <Column field="airdate" header="Air date" :sortable="true">
+          <Column
+            field="airdate"
+            header="Air date"
+            :sortable="true"
+          >
             <template #body="{ data }">
               {{ data.airdate ?? (data.airstamp ? new Date(data.airstamp).toISOString().slice(0, 10) : '—') }}
             </template>
           </Column>
 
-          <Column field="runtime" header="Runtime (min)" :sortable="true">
+          <Column
+            field="runtime"
+            header="Runtime (min)"
+            :sortable="true"
+          >
             <template #body="{ data }">
               {{ data.runtime ?? '—' }}
             </template>
@@ -188,7 +285,10 @@ function pluralize(count: number, singular: string, plural: string) {
 
           <Column header="Summary">
             <template #body="{ data }">
-              <span class="line-clamp-2 block" :title="stripHtml(data.summary)">
+              <span
+                class="line-clamp-2 block"
+                :title="stripHtml(data.summary)"
+              >
                 {{ stripHtml(data.summary?.slice(0,100)) + '...' || '—' }}
               </span>
             </template>
@@ -196,21 +296,41 @@ function pluralize(count: number, singular: string, plural: string) {
         </DataTable>
       </div>
 
-      <div v-if="castLoading" role="status" aria-live="polite" class="space-y-2">
-        <div class="skeleton skeleton-line" style="--lines:1; width: 30%"></div>
-        <div class="skeleton skeleton-line" style="--lines:4;"></div>
+      <div
+        v-if="castLoading"
+        role="status"
+        aria-live="polite"
+        class="space-y-2"
+      >
+        <div
+          class="skeleton skeleton-line"
+          style="--lines:1; width: 30%"
+        />
+        <div
+          class="skeleton skeleton-line"
+          style="--lines:4;"
+        />
       </div>
-      <div v-else-if="castError" role="alert" >
+      <div
+        v-else-if="castError"
+        role="alert"
+      >
         Couldn’t load cast.
-        <button class="btn ml-2" @click="refreshCast">Try again</button>
+        <button
+          class="btn ml-2"
+          @click="refreshCast"
+        >
+          Try again
+        </button>
       </div>
-      <div v-else class="mt-12">
-
-             <h2 class="text-xl font-semibold">
-        <span>Cast</span>
-      </h2>
-        <HorizontalScroller label="Cast" >
-
+      <div
+        v-else
+        class="mt-12"
+      >
+        <h2 class="text-xl font-semibold">
+          <span>Cast</span>
+        </h2>
+        <HorizontalScroller label="Cast">
           <template #default>
             <CastCard
             
@@ -219,7 +339,6 @@ function pluralize(count: number, singular: string, plural: string) {
               :cast="cast"
             />
           </template>
-
         </HorizontalScroller>
       </div>
     </section>

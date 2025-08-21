@@ -6,7 +6,10 @@ import TailwindGenerator from '@/components/TailwindGenerator.vue'
 
 <template>
   <!-- Skip link (visible on focus) -->
-  <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only"
+  >Skip to main content</a>
 
   <div class="px-4 py-4 relative">
     <AppHeader /> 
@@ -18,7 +21,12 @@ import TailwindGenerator from '@/components/TailwindGenerator.vue'
     </div>
 
     <!-- Main section with landmark role and focus target -->
-    <section id="main-content" role="main" tabindex="-1" class="mt-4">
+    <section
+      id="main-content"
+      role="main"
+      tabindex="-1"
+      class="mt-4"
+    >
       <router-view />
     </section>
 
