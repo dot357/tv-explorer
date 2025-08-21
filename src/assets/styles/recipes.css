@@ -1,11 +1,132 @@
-
 @import '@assets/styles/foundations.css';
 
 @layer components {
-  .card { @apply rounded-md bg-surface/80 ring-1 ring-white/10 p-3 shadow-card; }
-  .chip { @apply rounded-full px-2 py-0.5 text-xs ring-1 ring-white/10 bg-surface; }
-  .btn  { 
-    @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm transition focus:outline-none ring-1 ring-white/10 cursor-pointer active:ring-2 active:ring-white/50;
+  .card {
+    @apply rounded-md bg-surface/80 ring-1 ring-black/10 dark:ring-white/10 min-w-[250px] md:min-w-[300px] p-3;
+    @apply p-2 md:p-3;
+  }
+
+  .card-focus {
+    @apply block rounded-xl focus:outline-none;
+  }
+
+  .card-focus:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2 ring-offset-surface;
+  }
+
+  .chip {
+    @apply rounded-full px-2 py-0.5 text-xs ring-1 ring-white/10 bg-surface;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm transition 
+         cursor-pointer ring-1 ring-white/10 
+         focus:outline-none 
+         active:ring-2 active:ring-white/50;
+  }
+
+  /* Stronger visual clue on focus */
+  .btn:focus-visible,
+  .btn:focus-within {
+    @apply ring-2 ring-offset-2 ring-primary ring-offset-surface;
+  }
+  .btn-primary {
+    @apply bg-primary/15 hover:bg-primary/20;
+  }
+
+  /* A11y */
+  .sr-only {
+    @apply absolute w-px h-px p-0 m-[-1px] overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .p-paginator-page,
+  .p-paginator-next,
+  .p-paginator-prev {
+    @apply rounded-md px-3 py-1 cursor-pointer text-text hover:bg-primary/20;
+  }
+
+  .p-paginator .p-highlight {
+    @apply bg-primary text-white;
+  }
+
+  /* DataTable container */
+
+  table {
+    @apply w-full text-sm text-left;
+  }
+
+  /* Header row */
+
+  thead th {
+    @apply bg-surface font-medium h-[65px] text-text px-3 py-2 border-b border-muted/40  max-h-[20px];
+  }
+
+  thead th[aria-sort='ascending'],
+  thead th[aria-sort='descending'] {
+    @apply text-primary cursor-pointer;
+  }
+
+  thead th[aria-sort='ascending'] div,
+  thead th[aria-sort='descending'] div,
+  thead th div,
+  thead th div {
+    @apply flex flex-row items-center gap-2;
+  }
+
+  .p-datatable thead th[aria-sort] div {
+    @apply flex flex-row items-center gap-2 cursor-pointer;
+  }
+
+  .p-datatable thead th:not([aria-sort]) div {
+    @apply flex flex-row items-center gap-2 cursor-default;
+  }
+  /* Body rows */
+  tbody td {
+    @apply px-3 py-2 border-b border-muted/20 text-text;
+  }
+
+  tbody tr:hover {
+    @apply bg-muted/10;
+  }
+
+  /* Paginator root */
+  [data-pc-name="pcpaginator"][data-pc-section="root"] {
+    @apply flex items-center justify-end gap-1 p-2 border-t border-muted/30 text-xl;
+    
+  }
+
+ 
+  [data-pc-name="pcpaginator"] [data-pc-group-section="pagebutton"] {
+    @apply px-2 py-1 rounded-md text-text hover:bg-muted/10 ;
+  }
+   [data-pc-name="pcpaginator"] [data-pc-section="page"]{
+     @apply px-2 py-1 rounded-md text-text hover:bg-muted/10;
    }
-  .btn-primary { @apply bg-primary/15 hover:bg-primary/20; }
+
+  /* Active page */
+  [data-pc-name="pcpaginator"] [data-pc-section="page"][data-p-active="true"] {
+    @apply bg-primary/20 text-primary font-medium;
+  }
+
+  /* Disabled buttons */
+  [data-pc-name="pcpaginator"] button:disabled {
+    @apply opacity-40 cursor-not-allowed;
+  }
+
+  /* Rows-per-page dropdown */
+  [data-pc-name="pcrowperpagedropdown"][data-pc-section="root"] {
+    @apply hidden flex flex-row items-center w-[50px] rounded-sm bg-surface border border-muted/30;
+  }
+
+  /* Paginator footer look */
+  [data-pc-name="pcpaginator"][data-pc-section="root"] {
+    @apply bg-surface border-t border-muted/20 p-2 rounded-b-xl;
+  }
+
+  /* Hover + focus states */
+  [data-pc-name="pcpaginator"] [data-pc-group-section="pagebutton"]:hover {
+    @apply bg-muted/10;
+  }
+
+  
 }

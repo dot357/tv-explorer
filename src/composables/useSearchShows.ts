@@ -1,19 +1,18 @@
 
 import { ref, watch, onBeforeUnmount, computed } from 'vue';
-import { NetworkHandler } from '@services/NetworkHandler';
-import { tvAdapter} from '@services/tv.adapter';
 import type { Show } from '@/types/adapters/tv.adaptersTypes';
+import { nh } from '@/services/nh';
 
 type SearchHit = { score: number; show: Show };
 
 export function useSearchShows(initial = '', options?: { debounceMs?: number; page?: number }) {
-  const nh = new NetworkHandler(tvAdapter);
+ 
   const req = nh.useRequest('searchShows', { q: initial, page: options?.page ?? 0 });
   const query = ref(initial);
   const debounceMs = options?.debounceMs ?? 300;
 
-    //   Node.Timer
-  let debounceTimer: any;
+    //   Node.Timer deprecated
+  let debounceTimer : NodeJS.Timeout;
 
 
     // eases for search andd also can be calleable from outside

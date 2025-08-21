@@ -3,8 +3,11 @@ const SPECIALS: Record<string, string> = {
 };
 
 export function genreColorClass(genre?: string) {
-  if (!genre) return 'text-muted';
-  const key = SPECIALS[genre] ?? genre.toLowerCase();
+  
+  if (!genre){
+     return 'text-muted'
+  }
+  const key = SPECIALS[genre] ?? genre.toLowerCase()
   return `text-genre-${key}`;
 }
 export function genreBgClass(genre?: string, alpha = 10) {

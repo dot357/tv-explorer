@@ -14,6 +14,7 @@ const __dirnameApp = path.dirname(__filename);
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
+  base : '/tv-explorer/',
   server: {
     port: 3000
   },
@@ -36,7 +37,7 @@ export default defineConfig({
       {
         test : {
           name: 'unit',
-          environment: 'node',      
+           environment: 'jsdom',   
           globals: true,
           setupFiles: ['src/tests/setup.unit.ts'],
           exclude: ['tests/storybook/**', 'node_modules/**'],

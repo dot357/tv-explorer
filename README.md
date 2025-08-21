@@ -171,3 +171,17 @@ flowchart LR
     B --> A
 ```
 
+## Running with Docker
+This project can be built and served in a container using Docker with Nginx.
+
+**1. Build the image**
+From the project root, run:
+`docker build -t tv-maze -f ./DockerFile .`
+
+**2. Run the container**
+Expose the app on port 3000:
+`docker run -p 3000:80 tv-maze`
+
+**3. Access the app**
+Open your browser at:
+`http://localhost:3000`
