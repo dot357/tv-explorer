@@ -1,8 +1,8 @@
-name: Deploy to GitHub Pages
+name: Deploy app + Storybook to GitHub Pages
 
 on:
   push:
-    branches: [ master ]   # or your default branch
+    branches: [ master ]           # use main if that's your default
   workflow_dispatch:
 
 permissions:
@@ -18,22 +18,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: npm
 
       - name: Install
         run: npm ci
 
-      - name: Build
+      # --- Build the Vite app ---
+      - name: Build app
         run: npm run build
 
-      - name: Upload artifact
+      # --- Build Storybook and place it under dist/storybook ---
+      - name: Build Storybook
+        run: npm run build-storybook -- --output-dir storybook-static
+
+      - name: Move Storybook under /storybook
+        run: |
+          mkdir -p dist/storybook
+          cp -r storybook-static/* dist/storybook/
+
+      # SPA fallback for Vue Router deep links
+      - name: Add 404 fallback
+        run: cp dist/index.html dist/404.html
+
+      - name: Upload Pages artifact (dist)
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -45,6 +57,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
