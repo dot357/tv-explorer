@@ -1,20 +1,57 @@
 # TV Explorer
 
+## 🌐 Live Demos
 
-TODO: Need to add nvmrc - node version 22 crypto.hash fails on node 18
-[add bug report]()
+- **Application**: [https://dot357.github.io/tv-explorer/](https://dot357.github.io/tv-explorer/)
+- **Storybook**: [https://dot357.github.io/tv-explorer/storybook/](https://dot357.github.io/tv-explorer/storybook/)
+
+Both are automatically built and deployed via GitHub Actions:
+- The app is served at `/`.
+- Storybook is bundled into `/storybook/` within the same GitHub Pages site.
 
 
-TODO: Lets add es lint support
+### Node & NPM versions
+This project is built and tested against:
+- **Node.js**: v22.18.0  
+- **npm**: 10.9.3  
+
+For convenience, an [`.nvmrc`](.nvmrc) file is included.  
+If you use [nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+nvm use
+```
+
+## 📝 TODO
+- [+] Add `.nvmrc` with Node.js version **22**  
+  (⚠️ crypto.hash fails on Node 18)
+- [ ] [Add bug report]()
+
+
+
 
 <!-- https://primevue.org/theming/unstyled/ -->
-add architectural reasoning behind unstyled components
+### 🏗️ Architectural Reasoning: Unstyled Components
+
+In this project I intentionally favored **unstyled, headless components** rather than tightly styled ones.
+
+**Reasons:**
+- **Separation of concerns**  
+  Components handle behavior and accessibility logic (e.g. keyboard events, ARIA roles), while leaving visual presentation to the consumer.
+- **Design system flexibility**  
+  Styles are applied via Tailwind utilities and design tokens. This allows the same component to be reused across different themes or visual systems without modification.
+- **Scalability across brands**  
+  By decoupling style from logic, components can easily adapt to multiple brand identities or white-label use cases.
+- **Maintainability**  
+  Changing or upgrading a styling approach (e.g. Tailwind version, theme tokens) doesn’t require rewriting the core component logic.
+- **Accessibility first**  
+  Ensuring the base component handles semantics and interactions correctly means accessibility isn’t compromised by theming choices.
+**Example in this project:**  
+- Inputs, buttons, and scrollers expose only functional and structural hooks.  
+- Tailwind classes provide the look & feel.  
+- Storybook demonstrates both raw (unstyled) and themed (styled) variants.
 
 ## Prime vue
-
-
-
-
 ## Vite config
 add documentation entry for how to extend alias via vite config and make sure to include same details for tsconfig.app.json
 
