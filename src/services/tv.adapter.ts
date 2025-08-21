@@ -9,7 +9,7 @@ type TvRequests = {
   getShow:      RequestFn<{ id: number }, Show>;
   getSeasons:   RequestFn<{ id: number }, Season[]>;
   getEpisodes:  RequestFn<{ id: number }, Episode[]>;
-  getCast:      RequestFn<{ id: number }, CastMember[]>;
+  getCast:      RequestFn<{ id?: number }, CastMember[]>;
   getCrew:      RequestFn<{ id: number }, CrewMember[]>;
 };
 export const tvAdapter = new Adapter<TvRequests>({
@@ -51,11 +51,13 @@ export const tvAdapter = new Adapter<TvRequests>({
     const res = await tvApi.get<Episode[]>(`/shows/${id}/episodes`);
     return { data: res.data, status: res.status } satisfies NetResult<Episode[]>;
   },
-  async getCast(params) {
-    const { id } = params ?? ({} as { id: number });
-    if (id === null) {throw new Error('getCast: "id" is required');}
-    const res = await tvApi.get<CastMember[]>(`/shows/${id}/cast`);
-    return { data: res.data, status: res.status } satisfies NetResult<CastMember[]>;
+  async getCast(params?: { id?: number }) {
+    const { id } = params ?? {};
+    if (!id && id !== 0) {
+      throw new Error('getCast: "id" is required');
+    }
+    const res = await tvApi.get(`/shows/${id}/cast`);
+    return { data: res.data, status: res.status };
   },
 
   async getCrew(params) {

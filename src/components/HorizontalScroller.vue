@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
   showControls?: boolean
   focusableSelector?: string
 }>(), {
-  showControls: true,
+  showControls: false,
   // Give a default so the app works without passing anything
   focusableSelector: DEFAULT_SELECTOR,
 })

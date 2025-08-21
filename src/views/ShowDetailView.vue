@@ -6,9 +6,14 @@ import { useEpisodes } from '@/composables/useEpisodes';
 import { twMerge } from 'tailwind-merge';
 import { genreBgClass, genreColorClass } from '@/utils/genreClass';
 
-// PrimeVue (local registration for <script setup>)
+
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import { useCast } from '@/composables/useCast';
+import HorizontalScroller from '@/components/HorizontalScroller.vue';
+import CastCard from '@/components/CastCard.vue';
+
+
 defineOptions({ components: { DataTable, Column } });
 
 const route = useRoute();
@@ -34,6 +39,9 @@ const {
   error: episodesError,
   refreshEpisodes
 } = useEpisodes(showId);
+
+
+const { cast, loading: castLoading, error: castError, refreshCast } = useCast(showId);
 
 // helpers
 const formatCode = (season?: number, number?: number) =>
@@ -181,11 +189,38 @@ function pluralize(count: number, singular: string, plural: string) {
           <Column header="Summary">
             <template #body="{ data }">
               <span class="line-clamp-2 block" :title="stripHtml(data.summary)">
-                {{ stripHtml(data.summary.slice(0,100)) + '...' || '—' }}
+                {{ stripHtml(data.summary?.slice(0,100)) + '...' || '—' }}
               </span>
             </template>
           </Column>
         </DataTable>
+      </div>
+
+      <div v-if="castLoading" role="status" aria-live="polite" class="space-y-2">
+        <div class="skeleton skeleton-line" style="--lines:1; width: 30%"></div>
+        <div class="skeleton skeleton-line" style="--lines:4;"></div>
+      </div>
+      <div v-else-if="castError" role="alert" >
+        Couldn’t load cast.
+        <button class="btn ml-2" @click="refreshCast">Try again</button>
+      </div>
+      <div v-else class="mt-12">
+
+             <h2 class="text-xl font-semibold">
+        <span>Cast</span>
+      </h2>
+        <HorizontalScroller label="Cast" >
+
+          <template #default>
+            <CastCard
+            
+              v-for="(cast, castIndex) in cast"
+              :key="castIndex"
+              :cast="cast"
+            />
+          </template>
+
+        </HorizontalScroller>
       </div>
     </section>
   </section>
